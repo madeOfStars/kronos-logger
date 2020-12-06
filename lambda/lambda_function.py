@@ -63,25 +63,7 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("LogStartingDayIntent")(handler_input)
         
     def handle(self, handler_input):
-        starting_time = datetime.now()
-        hour = starting_time.hour + 1
-        minute = starting_time.minute
-        
-        if minute < 15:
-            minute  = 15
-        elif minute < 30:
-            minute = 30
-        elif minute < 45:
-            minute = 45
-        else:
-            minute = 0
-            hour = hour + 1
-        
-        formatted_time_string = "{hour}:{minute}".format(hour = hour, minute = minute)
-        current_time = datetime.strptime(formatted_time_string, "%H:%M").time()
-        formatted_time = current_time.strftime("%H:%M")
-        
-        speak_output = "You started your day at {starting_time}. Have a great day!".format(starting_time = formatted_time)
+        speak_output = "You started your day at {starting_time}. Have a great day!".format(starting_time = format_time())
         
         return (
             handler_input.response_builder
