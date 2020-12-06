@@ -58,7 +58,7 @@ class HelloWorldIntentHandler(AbstractRequestHandler):
 
 class LogStartingDayIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
-        return ask_utils.is_request_type("LogStartingDayIntent")(handler_input)
+        return ask_utils.is_intent_name("LogStartingDayIntent")(handler_input)
         
     def handle(self, handler_input):
         speak_output = "This is your Starting day intent. Have a great day!"
