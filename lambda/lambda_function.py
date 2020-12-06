@@ -58,7 +58,6 @@ class HelloWorldIntentHandler(AbstractRequestHandler):
 
 class LogStartingDayIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
-        logger.warning('Watch out!')
         return ask_utils.is_request_type("LogStartingDayIntent")(handler_input)
         
     def handle(self, handler_input):
