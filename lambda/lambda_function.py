@@ -63,6 +63,8 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         speak_output = "This is your Starting day intent. Have a great day!"
         
+        logger.warning(speak_output)
+        
         return (
             handler_input.response_builder
             .speak(speak_output)
