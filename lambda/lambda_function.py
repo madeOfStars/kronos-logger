@@ -28,6 +28,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         speak_output = "Welcome, to your first Intent. So far I support only the start of day Intent"
+        ask_output = "What would you like to do?"
 
         return (
             handler_input.response_builder
