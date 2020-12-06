@@ -27,7 +27,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speak_output = "Welcome, you can say Hello or Help. Which would you like to try?"
+        speak_output = "Welcome, to your first Intent. So far I support only the start of day Intent"
 
         return (
             handler_input.response_builder
@@ -54,6 +54,19 @@ class HelloWorldIntentHandler(AbstractRequestHandler):
                 .response
         )
 
+
+class LogStartingDayIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        return ask_utils.is_request_type("LogStartingDayIntent")(handler_input)
+        
+    def handle(self, handler_input):
+        speak_output = "This is you Starting day intent. Have a great day!"
+        
+        return (
+            handler_input.response_builder
+            .speak(speak_output)
+            .response
+            )
 
 class HelpIntentHandler(AbstractRequestHandler):
     """Handler for Help Intent."""
