@@ -60,7 +60,7 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
         return ask_utils.is_request_type("LogStartingDayIntent")(handler_input)
         
     def handle(self, handler_input):
-        speak_output = "This is you Starting day intent. Have a great day!"
+        speak_output = "This is your Starting day intent. Have a great day!"
         
         return (
             handler_input.response_builder
