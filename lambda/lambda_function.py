@@ -81,7 +81,7 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
         current_time = datetime.strptime(formatted_time_string, "%H:%M").time()
         formatted_time = current_time.strftime("%H:%M")
         
-        speak_output = "You started your day at {starting_time}. Have a great day!".format(starting_time = current_string_time)
+        speak_output = "You started your day at {starting_time}. Have a great day!".format(starting_time = formatted_time)
         
         return (
             handler_input.response_builder
