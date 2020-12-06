@@ -64,7 +64,7 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
         
     def handle(self, handler_input):
         starting_time = datetime.now()
-        hour = starting_time.hour
+        hour = starting_time.hour + 1
         minute = starting_time.minute
         
         if minute < 15:
@@ -78,8 +78,8 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
             hour = hour + 1
         
         formatted_time_string = "{hour}:{minute}".format(hour = hour, minute = minute)
-        
-        current_string_time = datetime.strptime(formatted_time_string, "%H:%M").time()
+        current_time = datetime.strptime(formatted_time_string, "%H:%M").time()
+        formatted_time = current_time.strftime("%H:%M")
         
         speak_output = "You started your day at {starting_time}. Have a great day!".format(starting_time = current_string_time)
         
