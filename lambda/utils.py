@@ -27,3 +27,26 @@ def create_presigned_url(object_name):
 
     # The response contains the presigned URL
     return response
+    
+
+
+def format_time():
+    starting_time = datetime.now()
+    hour = starting_time.hour
+    minute = starting_time.minute
+
+    if minute < 15:
+        minute  = 15
+    elif minute < 30:
+        minute = 30
+    elif minute < 45:
+        minute = 45
+    else:
+        minute = 0
+        hour = hour + 1
+
+    formatted_time_string = "{hour}:{minute}".format(hour = hour, minute = minute)
+    current_time = datetime.strptime(formatted_time_string, "%H:%M").time()
+    formatted_time = current_time.strftime("%H:%M")
+
+    return formatted_time
