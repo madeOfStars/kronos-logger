@@ -77,7 +77,7 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
             minute = 0
             hour = hour + 1
         
-        formatted_time_string = "{hour}:{time}".format(hour = hour, time = time)
+        formatted_time_string = "{hour}:{minute}".format(hour = hour, minute = minute)
         
         current_string_time = datetime.datetime.strptime(formatted_time_string, "%H:%M")
         
