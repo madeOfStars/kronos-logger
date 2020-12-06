@@ -14,6 +14,8 @@ from ask_sdk_core.handler_input import HandlerInput
 
 from ask_sdk_model import Response
 
+from datetime import datetime
+
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
@@ -61,9 +63,10 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("LogStartingDayIntent")(handler_input)
         
     def handle(self, handler_input):
-        speak_output = "This is your Starting day intent. Have a great day!"
+        starting_time = datetime.now()
+        current_string_time = now.strftime("%H:%M")
         
-        logger.warning(speak_output)
+        speak_output = "You started your day at {starting_time}. Have a great day!".format(starting_time = starting_time)
         
         return (
             handler_input.response_builder
