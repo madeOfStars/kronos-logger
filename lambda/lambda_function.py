@@ -67,7 +67,7 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
             handler_input.response_builder
             .speak(speak_output)
             .response
-            )
+        )
 
 class HelpIntentHandler(AbstractRequestHandler):
     """Handler for Help Intent."""
