@@ -32,7 +32,7 @@ def create_presigned_url(object_name):
 
 def format_time():
     starting_time = datetime.now()
-    hour = starting_time.hour
+    hour = starting_time.hour + 1
     minute = starting_time.minute
 
     if minute < 15:
