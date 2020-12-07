@@ -66,7 +66,7 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         start_time_input = get_slot_value(handler_input, "start_time")
         
-        speak_output = "You started your day at {starting_time}. Have a great day!".format(starting_time = format_time())
+        speak_output = "You started your day at {starting_time}. Have a great day!".format(starting_time = start_time_input)
         
         return (
             handler_input.response_builder
