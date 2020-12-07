@@ -63,6 +63,8 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("LogStartingDayIntent")(handler_input)
         
     def handle(self, handler_input):
+        start_time_input = ask_sdk_core.utils.request_util.get_slot_value(handler_input, "start_time")
+        
         speak_output = "You started your day at {starting_time}. Have a great day!".format(starting_time = format_time())
         
         return (
