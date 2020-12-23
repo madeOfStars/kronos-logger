@@ -61,7 +61,6 @@ class HelloWorldIntentHandler(AbstractRequestHandler):
 
 class LogStartingDayIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
-        # test
         return ask_utils.is_intent_name("LogStartingDayIntent")(handler_input)
         
     def handle(self, handler_input):
