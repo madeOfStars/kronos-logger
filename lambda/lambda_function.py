@@ -5,6 +5,8 @@
 # session persistence, api calls, and more.
 # This sample is built using the handler classes approach in skill builder.
 import logging
+import os
+import boto3
 import ask_sdk_core.utils as ask_utils
 
 from ask_sdk_core.skill_builder import SkillBuilder
@@ -13,12 +15,22 @@ from ask_sdk_core.dispatch_components import AbstractExceptionHandler
 from ask_sdk_core.handler_input import HandlerInput
 from ask_sdk_core.utils.request_util import get_slot_value
 
+from ask_sdk_core.skill_builder import CustomSkillBuilder
+from ask_sdk_dynamodb.adapter import DynamoDbAdapter
+
 from ask_sdk_model import Response
 
 from utils import format_time
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
+
+
+ddb_region = os.environ.get('DYNAMODB_PERSISTENCE_REGION')
+ddb_table_name = os.environ.get('DYNAMODB_PERSISTENCE_TABLE_NAME')
+
+ddb_resource = boto3.resource('dynamodb', region_name=ddb_region)
+dynamodb_adapter = DynamoDbAdapter(table_name=ddb_table_name, create_table=False, dynamodb_resource=ddb_resource)
 
 
 class LaunchRequestHandler(AbstractRequestHandler):
@@ -69,7 +81,16 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
         time_output = start_time_input
         if start_time_input is None:
             time_output = format_time()
-            
+
+        attr = handler_input.attributes_manager.persistent_attributes
+    
+        if not attr:
+        attr['counter'] = 0
+        attr['state'] = 'ENDED'
+
+        handler_input.attributes_manager.session_attributes = attr
+
+        handler_input.attributes_manager.save_persistent_attributes()    
         
         speak_output = "You started your day at {starting_time}. Have a great day!".format(starting_time = time_output)
         
@@ -179,7 +200,7 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
 # defined are included below. The order matters - they're processed top to bottom.
 
 
-sb = SkillBuilder()
+sb = CustomSkillBuilder(persistence_adapter = dynamodb_adapter)
 
 sb.add_request_handler(LaunchRequestHandler())
 sb.add_request_handler(HelloWorldIntentHandler())
