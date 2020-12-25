@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 
-ddb_region = os.environ.get('DYNAMODB_PERSISTENCE_REGION')
+ddb_region = os.environ.get('eu-central-1')
 ddb_table_name = os.environ.get('logged-hours')
 
 ddb_resource = boto3.resource('dynamodb', region_name=ddb_region)
