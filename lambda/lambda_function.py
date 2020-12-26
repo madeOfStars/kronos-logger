@@ -87,7 +87,7 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
         if not attr:
             attr['counter'] = 0
             attr['state'] = 'ENDED'
-            attr['date'] = 'sot'
+            attr['date'] = 'dje'
 
         handler_input.attributes_manager.session_attributes = attr
 
