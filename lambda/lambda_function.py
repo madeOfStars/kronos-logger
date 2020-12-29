@@ -5,8 +5,6 @@
 # session persistence, api calls, and more.
 # This sample is built using the handler classes approach in skill builder.
 import logging
-import os
-import boto3
 import ask_sdk_core.utils as ask_utils
 
 from ask_sdk_core.skill_builder import SkillBuilder
@@ -16,25 +14,17 @@ from ask_sdk_core.handler_input import HandlerInput
 from ask_sdk_core.utils.request_util import get_slot_value
 
 from ask_sdk_core.skill_builder import CustomSkillBuilder
-from ask_sdk_dynamodb.adapter import DynamoDbAdapter
 
 from ask_sdk_model import Response
 
-from ask_sdk_core.exceptions import PersistenceException
-from boto3.session import ResourceNotExistsError
-
 from utils import format_time
+from db_utils import DbUtils
+from session_utils import save_start_of_day
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-
-ddb_region = os.environ.get('DYNAMODB_PERSISTENCE_REGION')
-ddb_table_name = os.environ.get('DYNAMODB_PERSISTENCE_TABLE_NAME')
-
-ddb_resource = boto3.resource('dynamodb', region_name=ddb_region)
-dynamodb_adapter = DynamoDbAdapter(table_name=ddb_table_name, create_table=False, dynamodb_resource=ddb_resource)
-
+du = DbUtils()
 
 class LaunchRequestHandler(AbstractRequestHandler):
     """Handler for Skill Launch."""
@@ -85,27 +75,9 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
         if start_time_input is None:
             time_output = format_time()
 
-        data_from_db = None
+        start_time_input(handler_input, time_output)
 
-        try:
-            table = ddb_resource.Table(ddb_table_name)
-            data_from_db = table.get_item(
-                Key = {
-                    "id" : "20201230"
-                }
-            )
-        except ResourceNotExistsError:
-            raise PersistenceException(
-                "DynamoDb table {} doesn't exist. Failed to save attributes "
-                "to DynamoDb table.".format(
-                    ddb_table_name))
-        except Exception as e:
-            raise PersistenceException(
-                "Failed to save attributes to DynamoDb table. Exception of "
-                "type {} occurred: {}".format(
-                    type(e).__name__, str(e)))   
-        
-        speak_output = "You started your day at {starting_time}. Have a great day! {data_from_db}".format(starting_time = time_output, data_from_db = data_from_db['Item']['A6'])
+        speak_output = "You started your day at {starting_time}. Have a great day!".format(starting_time = time_output)
         
         return (
             handler_input.response_builder
@@ -213,7 +185,7 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
 # defined are included below. The order matters - they're processed top to bottom.
 
 
-sb = CustomSkillBuilder(persistence_adapter = dynamodb_adapter)
+sb = CustomSkillBuilder(persistence_adapter = du.dynamodb_adapter)
 
 sb.add_request_handler(LaunchRequestHandler())
 sb.add_request_handler(HelloWorldIntentHandler())
