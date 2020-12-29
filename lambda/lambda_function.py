@@ -89,7 +89,7 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
             table = ddb_resource.Table(ddb_table_name)
             table.put_item(
                 Item={
-                    "id": "20201229"
+                    "id": "20201229",
                     "A1": 1,
                     "A2": 2
                 })
