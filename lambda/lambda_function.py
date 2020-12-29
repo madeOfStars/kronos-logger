@@ -77,6 +77,13 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
         
     def handle(self, handler_input):
         start_time_input = get_slot_value(handler_input, "start_time")
+
+        # start of username testing
+
+        upsServiceClient = handler_input.serviceClientFactory.getUpsServiceClient();
+        profileName = upsServiceClient.getProfileName();
+
+        # end of username testing
         
         time_output = start_time_input
         if start_time_input is None:
@@ -87,13 +94,12 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
         if not attr:
             attr['counter'] = 0
             attr['state'] = 'ENDED'
-            attr['date'] = 'dje'
 
         handler_input.attributes_manager.session_attributes = attr
 
         handler_input.attributes_manager.save_persistent_attributes()    
         
-        speak_output = "You started your day at {starting_time}. Have a great day!".format(starting_time = time_output)
+        speak_output = "You started your day at {starting_time}. Have a great day! {profileName}".format(starting_time = time_output, profileName = profileName)
         
         return (
             handler_input.response_builder
