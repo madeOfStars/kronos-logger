@@ -75,7 +75,7 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
         if start_time_input is None:
             time_output = format_time()
 
-        start_time_input(handler_input, time_output)
+        save_start_of_day(handler_input, time_output)
 
         speak_output = "You started your day at {starting_time}. Have a great day!".format(starting_time = time_output)
         
