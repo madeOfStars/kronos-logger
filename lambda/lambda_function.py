@@ -77,13 +77,6 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
         
     def handle(self, handler_input):
         start_time_input = get_slot_value(handler_input, "start_time")
-
-        # start of username testing
-
-        upsServiceClient = handler_input.serviceClientFactory.getUpsServiceClient();
-        profileName = upsServiceClient.getProfileName();
-
-        # end of username testing
         
         time_output = start_time_input
         if start_time_input is None:
