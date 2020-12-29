@@ -91,7 +91,8 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
                 Item={
                     "id": "20201229",
                     "A1": 1,
-                    "A2": 2
+                    "A2": 2,
+                    "A3": 3
                 })
         except ResourceNotExistsError:
             raise PersistenceException(
