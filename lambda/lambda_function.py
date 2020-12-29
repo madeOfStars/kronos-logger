@@ -85,17 +85,15 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
         if start_time_input is None:
             time_output = format_time()
 
+        data_from_db = None
+
         try:
             table = ddb_resource.Table(ddb_table_name)
-            table.put_item(
-                Item={
-                    "id": "20201230",
-                    # "A1": 1,
-                    # "A2": 2,
-                    # "A3": 3,
-                    # "A4": 4,
-                    "A5": 5
-                })
+            data_from_db = table.get_item(
+                Key = {
+                    "id"
+                }
+            )
         except ResourceNotExistsError:
             raise PersistenceException(
                 "DynamoDb table {} doesn't exist. Failed to save attributes "
@@ -107,7 +105,7 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
                 "type {} occurred: {}".format(
                     type(e).__name__, str(e)))   
         
-        speak_output = "You started your day at {starting_time}. Have a great day!".format(starting_time = time_output)
+        speak_output = "You started your day at {starting_time}. Have a great day! {data_from_db}".format(starting_time = time_output, data_from_db = data_from_db)
         
         return (
             handler_input.response_builder
