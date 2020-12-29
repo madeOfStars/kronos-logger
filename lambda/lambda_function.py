@@ -82,15 +82,23 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
         if start_time_input is None:
             time_output = format_time()
 
-        attr = handler_input.attributes_manager.persistent_attributes
-    
-        if not attr:
-            attr['counter'] = 0
-            attr['state'] = 'ENDED'
-
-        handler_input.attributes_manager.session_attributes = attr
-
-        handler_input.attributes_manager.save_persistent_attributes()    
+        try:
+            table = ddb_resource.Table(ddb_table_name)
+            table.put_item(
+                Item={
+                    "A1": 1,
+                    "A2": 2
+                })
+        except ResourceNotExistsError:
+            raise PersistenceException(
+                "DynamoDb table {} doesn't exist. Failed to save attributes "
+                "to DynamoDb table.".format(
+                    ddb_table_name))
+        except Exception as e:
+            raise PersistenceException(
+                "Failed to save attributes to DynamoDb table. Exception of "
+                "type {} occurred: {}".format(
+                    type(e).__name__, str(e)))   
         
         speak_output = "You started your day at {starting_time}. Have a great day!".format(starting_time = time_output)
         
