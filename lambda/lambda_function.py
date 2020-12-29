@@ -90,10 +90,11 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
             table.put_item(
                 Item={
                     "id": "20201230",
-                    "A1": 1,
-                    "A2": 2,
-                    "A3": 3,
-                    # "A4": 4
+                    # "A1": 1,
+                    # "A2": 2,
+                    # "A3": 3,
+                    # "A4": 4,
+                    "A5": 5
                 })
         except ResourceNotExistsError:
             raise PersistenceException(
