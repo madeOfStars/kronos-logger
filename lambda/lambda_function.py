@@ -107,7 +107,7 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
                 "type {} occurred: {}".format(
                     type(e).__name__, str(e)))   
         
-        speak_output = "You started your day at {starting_time}. Have a great day! {data_from_db}".format(starting_time = time_output, data_from_db = data_from_db)
+        speak_output = "You started your day at {starting_time}. Have a great day! {data_from_db}".format(starting_time = time_output, data_from_db = data_from_db['Item']['A5']['S'])
         
         return (
             handler_input.response_builder
