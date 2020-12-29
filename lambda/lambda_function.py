@@ -20,6 +20,9 @@ from ask_sdk_dynamodb.adapter import DynamoDbAdapter
 
 from ask_sdk_model import Response
 
+from ask_sdk_core.exceptions import PersistenceException
+from boto3.session import ResourceNotExistsError
+
 from utils import format_time
 
 logger = logging.getLogger(__name__)
