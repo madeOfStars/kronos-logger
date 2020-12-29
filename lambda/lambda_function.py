@@ -92,7 +92,7 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
 
         handler_input.attributes_manager.save_persistent_attributes()    
         
-        speak_output = "You started your day at {starting_time}. Have a great day! {profileName}".format(starting_time = time_output, profileName = profileName)
+        speak_output = "You started your day at {starting_time}. Have a great day!".format(starting_time = time_output)
         
         return (
             handler_input.response_builder
