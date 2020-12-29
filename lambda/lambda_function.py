@@ -91,7 +91,9 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
             table = ddb_resource.Table(ddb_table_name)
             data_from_db = table.get_item(
                 Key = {
-                    "id"
+                    "id" : {
+                        'S': '20201230'
+                    }
                 }
             )
         except ResourceNotExistsError:
