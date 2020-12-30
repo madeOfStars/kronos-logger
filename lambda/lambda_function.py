@@ -85,6 +85,27 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
             .response
         )
 
+class LogStartOfBreakIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        return ask_utils.is_intent_name("LogStartOfBreakIntent")(handler_input)
+        
+    def handle(self, handler_input):
+        start_time_input = get_slot_value(handler_input, "break_start_time")
+        
+        time_output = start_time_input
+        if start_time_input is None:
+            time_output = format_time()
+
+        save_start_of_day(handler_input, time_output)
+
+        speak_output = "You started your break at {starting_time}. Have a great day!".format(starting_time = time_output)
+        
+        return (
+            handler_input.response_builder
+            .speak(speak_output)
+            .response
+        )
+
 class HelpIntentHandler(AbstractRequestHandler):
     """Handler for Help Intent."""
     def can_handle(self, handler_input):
@@ -190,6 +211,7 @@ sb = CustomSkillBuilder(persistence_adapter = du.dynamodb_adapter)
 sb.add_request_handler(LaunchRequestHandler())
 sb.add_request_handler(HelloWorldIntentHandler())
 sb.add_request_handler(LogStartingDayIntentHandler())
+sb.add_request_handler(LogStartOfBreakIntentHandler())
 sb.add_request_handler(HelpIntentHandler())
 sb.add_request_handler(CancelOrStopIntentHandler())
 sb.add_request_handler(SessionEndedRequestHandler())
