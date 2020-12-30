@@ -10,12 +10,12 @@ class DbUtils:
         self.ddb_region = os.environ.get('DYNAMODB_PERSISTENCE_REGION')
         self.ddb_table_name = os.environ.get('DYNAMODB_PERSISTENCE_TABLE_NAME')
         self.ddb_resource = boto3.resource('dynamodb', region_name=self.ddb_region)
-        self.dynamodb_adapter = DynamoDbAdapter(table_name=self.ddb_table_name, create_table=False, dynamodb_resource=self.ddb_resource)
+        self._dynamodb_adapter = DynamoDbAdapter(table_name=self.ddb_table_name, create_table=False, dynamodb_resource=self.ddb_resource)
 
     @property
     def dynamodb_adapter(self):
-        return self.dynamodb_adapter
+        return self._dynamodb_adapter
 
     @dynamodb_adapter.setter
     def dynamodb_adapter(self, value):
-        self.dynamodb_adapter = value
+        self._dynamodb_adapter = value
