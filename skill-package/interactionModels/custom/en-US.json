@@ -47,19 +47,19 @@
         {
           "name": "LogStartOfBreakIntent",
           "slots": [
-            {
-              "name": "break_start_time",
-              "type": "AMAZON.TIME"
-            }
+              {
+                  "name": "break_start_time",
+                  "type": "AMAZON.TIME"
+              }
           ],
           "samples": [
-            "starting break time is {start_time}",
-            "start my break at {start_time}",
-            "i started my break",
-            "log my break time",
-            "begin break"
+              "starting break time is {break_start_time}",
+              "start my break at {break_start_time}",
+              "i started my break",
+              "log my break time",
+              "begin break"
           ]
-        },
+      },
         {
           "name": "AMAZON.NavigateHomeIntent",
           "samples": []
