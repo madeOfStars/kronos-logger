@@ -5,6 +5,7 @@ from ask_sdk_core.utils.request_util import get_slot_value
 from utils import format_time
 from session_utils import save_start_of_day
 from session_utils import save_start_of_break
+from session_utils import save_end_of_break
 
 class HelloWorldIntentHandler(AbstractRequestHandler):
     """Handler for Hello World Intent."""
@@ -79,7 +80,7 @@ class LogEndOfBreakIntentHandler(AbstractRequestHandler):
         if break_end_input is None:
             time_output = format_time()
 
-        save_start_of_break(handler_input, time_output)
+        save_end_of_break(handler_input, time_output)
 
         speak_output = "You ended your break at {ending_time}. Have a great day!".format(ending_time = time_output)
         
