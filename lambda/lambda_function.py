@@ -20,6 +20,7 @@ from db_utils import DbUtils
 
 from custom_intents import LogStartingDayIntentHandler
 from custom_intents import LogStartOfBreakIntentHandler
+from custom_intents import LogEndOfBreakIntentHandler
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -150,6 +151,7 @@ sb = CustomSkillBuilder(persistence_adapter = du.dynamodb_adapter)
 sb.add_request_handler(LaunchRequestHandler())
 sb.add_request_handler(LogStartingDayIntentHandler())
 sb.add_request_handler(LogStartOfBreakIntentHandler())
+sb.add_request_handler(LogEndOfBreakIntentHandler())
 sb.add_request_handler(HelpIntentHandler())
 sb.add_request_handler(CancelOrStopIntentHandler())
 sb.add_request_handler(SessionEndedRequestHandler())

@@ -66,3 +66,25 @@ class LogStartOfBreakIntentHandler(AbstractRequestHandler):
             .speak(speak_output)
             .response
         )
+
+
+class LogEndOfBreakIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        return ask_utils.is_intent_name("LogEndOfBreakIntent")(handler_input)
+        
+    def handle(self, handler_input):
+        break_end_input = get_slot_value(handler_input, "break_end_time")
+        
+        time_output = break_end_input
+        if break_end_input is None:
+            time_output = format_time()
+
+        save_start_of_break(handler_input, time_output)
+
+        speak_output = "You ended your break at {ending_time}. Have a great day!".format(ending_time = time_output)
+        
+        return (
+            handler_input.response_builder
+            .speak(speak_output)
+            .response
+        )
