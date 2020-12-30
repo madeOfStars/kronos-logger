@@ -15,3 +15,7 @@ class DbUtils:
     @property
     def dynamodb_adapter(self):
         return self.dynamodb_adapter
+
+    @dynamodb_adapter.setter
+    def dynamodb_adapter(self, value):
+        self.dynamodb_adapter = value
