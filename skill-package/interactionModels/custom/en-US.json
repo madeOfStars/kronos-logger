@@ -77,6 +77,22 @@
           ]
         },
         {
+          "name": "LogEndOfDayIntent",
+          "slots": [
+              {
+                  "name": "end_time",
+                  "type": "AMAZON.TIME"
+              }
+          ],
+          "samples": [
+              "ending time is {end_time}",
+              "end my day at {end_time}",
+              "i ended working",
+              "log my ending time",
+              "end day"
+          ]
+        },
+        {
           "name": "AMAZON.NavigateHomeIntent",
           "samples": []
         }

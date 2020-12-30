@@ -36,7 +36,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speak_output = "Welcome, to your first Intent. So far I support the start of day Intent and begin break intent"
+        speak_output = "Welcome to Kronos. What would like to do?"
         ask_output = "What would you like Kronos to do?"
 
         return (
