@@ -21,6 +21,7 @@ from db_utils import DbUtils
 from custom_intents import LogStartingDayIntentHandler
 from custom_intents import LogStartOfBreakIntentHandler
 from custom_intents import LogEndOfBreakIntentHandler
+from custom_intents import LogEndOfDayIntentHandler
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -152,6 +153,7 @@ sb.add_request_handler(LaunchRequestHandler())
 sb.add_request_handler(LogStartingDayIntentHandler())
 sb.add_request_handler(LogStartOfBreakIntentHandler())
 sb.add_request_handler(LogEndOfBreakIntentHandler())
+sb.add_request_handler(LogEndOfDayIntentHandler())
 sb.add_request_handler(HelpIntentHandler())
 sb.add_request_handler(CancelOrStopIntentHandler())
 sb.add_request_handler(SessionEndedRequestHandler())
