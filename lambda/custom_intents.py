@@ -1,3 +1,5 @@
+from ask_sdk_core.dispatch_components import AbstractRequestHandler
+
 from utils import format_time
 from session_utils import save_start_of_day
 from session_utils import save_start_of_break
