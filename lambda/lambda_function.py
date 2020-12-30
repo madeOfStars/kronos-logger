@@ -149,7 +149,6 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
 sb = CustomSkillBuilder(persistence_adapter = du.dynamodb_adapter)
 
 sb.add_request_handler(LaunchRequestHandler())
-sb.add_request_handler(HelloWorldIntentHandler())
 sb.add_request_handler(LogStartingDayIntentHandler())
 sb.add_request_handler(LogStartOfBreakIntentHandler())
 sb.add_request_handler(HelpIntentHandler())
