@@ -55,7 +55,7 @@ def format_time():
 
 
 def calculate_diff_between_start_time_and_end_time(start_time, end_time):
-    return datetime.strptime(end_time, fmt) - datetime.strptime(start_time, FMT)
+    return datetime.strptime(end_time, FMT) - datetime.strptime(start_time, FMT)
 
 
 def make_difference_readable(time):
