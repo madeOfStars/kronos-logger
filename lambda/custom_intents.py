@@ -106,7 +106,7 @@ class LogEndOfDayIntentHandler(AbstractRequestHandler):
 
         # save_end_of_break(handler_input, time_output)
 
-        speak_output = "You ended your break at {ending_time}. Have a great day!".format(ending_time = time_output)
+        speak_output = "You ended your day at {ending_time}. Have a great day!".format(ending_time = time_output)
         
         return (
             handler_input.response_builder
