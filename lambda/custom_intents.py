@@ -62,7 +62,7 @@ class LogStartOfBreakIntentHandler(AbstractRequestHandler):
         worked_hours = save_start_of_break_and_calculate_worked_hours(handler_input, time_output)
         worked_hours_message = make_difference_readable(worked_hours)
 
-        speak_output = "You started your break at {starting_time}. " + worked_hours_message + " Have a great day!".format(starting_time = time_output)
+        speak_output = "You started your break at {starting_time}. ".format(ending_time = time_output) + worked_hours_message + " Have a great day!"
         
         return (
             handler_input.response_builder

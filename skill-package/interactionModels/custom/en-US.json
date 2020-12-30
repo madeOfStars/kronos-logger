@@ -59,7 +59,23 @@
               "log my break time",
               "begin break"
           ]
-      },
+        },
+        {
+          "name": "LogEndOfBreakIntent",
+          "slots": [
+              {
+                  "name": "break_end_time",
+                  "type": "AMAZON.TIME"
+              }
+          ],
+          "samples": [
+              "ending break time is {break_end_time}",
+              "end my break at {break_end_time}",
+              "i ended my break",
+              "log my end break time",
+              "end break"
+          ]
+        },
         {
           "name": "AMAZON.NavigateHomeIntent",
           "samples": []
