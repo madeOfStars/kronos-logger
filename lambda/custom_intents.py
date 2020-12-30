@@ -1,5 +1,6 @@
 import ask_sdk_core.utils as ask_utils
 from ask_sdk_core.dispatch_components import AbstractRequestHandler
+from ask_sdk_core.utils.request_util import get_slot_value
 
 from utils import format_time
 from session_utils import save_start_of_day
