@@ -20,6 +20,7 @@ from ask_sdk_model import Response
 from utils import format_time
 from db_utils import DbUtils
 from session_utils import save_start_of_day
+from session_utils import save_start_of_break
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -96,7 +97,7 @@ class LogStartOfBreakIntentHandler(AbstractRequestHandler):
         if start_time_input is None:
             time_output = format_time()
 
-        # save_start_of_day(handler_input, time_output)
+        save_start_of_break(handler_input, time_output)
 
         speak_output = "You started your break at {starting_time}. Have a great day!".format(starting_time = time_output)
         
