@@ -5,6 +5,8 @@ from botocore.exceptions import ClientError
 
 from datetime import datetime
 
+FMT = "%H:%M"
+
 
 def create_presigned_url(object_name):
     """Generate a presigned URL to share an S3 object with a capped expiration of 60 seconds
@@ -46,7 +48,33 @@ def format_time():
         hour = hour + 1
 
     formatted_time_string = "{hour}:{minute}".format(hour = hour, minute = minute)
-    current_time = datetime.strptime(formatted_time_string, "%H:%M").time()
-    formatted_time = current_time.strftime("%H:%M")
+    current_time = datetime.strptime(formatted_time_string, FMT).time()
+    formatted_time = current_time.strftime(FMT)
 
     return formatted_time
+
+
+def calculate_diff_between_start_time_and_end_time(start_time, end_time):
+    return datetime.strptime(end_time, fmt) - datetime.strptime(start_time, FMT)
+
+
+def make_difference_readable(time):
+    hours = int(time.seconds / 3600)
+    minutes = int((time.seconds / 60) % 60)
+
+    hours_message = ""
+    if (hours == 1):
+        hours_message = "one hour"
+    else:
+        hours_message = "{hours} hours".format(hours = hours)
+
+    minutes_message = ""
+    if (minutes > 0):
+        minutes_message = " {minutes} minutes".format(minutes = minutes)
+
+    connector_message = ""
+    if (hours > 0 and minutes > 0):
+        connector_message = " and "
+
+
+    return "You have worked " + hours_message + connector_message + minutes_message
