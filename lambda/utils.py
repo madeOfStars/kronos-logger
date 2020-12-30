@@ -31,7 +31,6 @@ def create_presigned_url(object_name):
     return response
     
 
-
 def format_time():
     starting_time = datetime.now()
     hour = (starting_time.hour + 1) % 24
@@ -58,9 +57,15 @@ def calculate_diff_between_start_time_and_end_time(start_time, end_time):
     return datetime.strptime(end_time, FMT) - datetime.strptime(start_time, FMT)
 
 
-def make_difference_readable(time):
+def format_timedelta_to_hours_and_minutes(time):
     hours = int(time.seconds / 3600)
     minutes = int((time.seconds / 60) % 60)
+
+    return hours, minutes
+
+
+def make_difference_readable(time):
+    hours, minutes = format_timedelta_to_hours_and_minutes(time)
 
     hours_message = ""
     if (hours == 1):
