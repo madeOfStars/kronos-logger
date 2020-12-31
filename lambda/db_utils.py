@@ -22,7 +22,7 @@ class DbUtils:
 
     def save_day(self, start_of_day, break_length, end_of_day, total_worked_hours):
         try:
-            table = ddb_resource.Table(self.ddb_table_name)
+            table = self.ddb_resource.Table(self.ddb_table_name)
             table.put_item(
                 Item={
                     "id": "20201231",
