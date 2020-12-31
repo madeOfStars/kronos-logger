@@ -110,11 +110,11 @@ class LogEndOfDayIntentHandler(AbstractRequestHandler):
         if end_input is None:
             time_output = format_time()
 
-        start_of_day, break_length, end_of_day, total_worked_hours = save_end_of_day_and_total_hours(handler_input, time_output)
+        start_of_day, break_length, end_of_day, total_worked_hours, formatted_worked_hours = save_end_of_day_and_total_hours(handler_input, time_output)
 
         worked_hours_message = make_difference_readable(total_worked_hours)
 
-        du.save_day(start_of_day, break_length, end_of_day, total_worked_hours)
+        du.save_day(start_of_day, break_length, end_of_day, formatted_worked_hours)
 
         speak_output = "You ended your day at {ending_time}.".format(ending_time = time_output) + " Have a great day!"
         

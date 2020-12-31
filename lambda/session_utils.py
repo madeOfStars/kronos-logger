@@ -40,7 +40,7 @@ def save_end_of_day_and_total_hours(handler_input, time):
     formatted_worked_hours = format_timedelta(total_hours)
     save_attribute('total_hours', handler_input, formatted_worked_hours)
 
-    return start_of_day, break_length, time, total_hours
+    return start_of_day, break_length, time, total_hours, formatted_worked_hours
 
 
 def save_attribute(attribute_name, handler_input, time):
