@@ -116,7 +116,7 @@ class LogEndOfDayIntentHandler(AbstractRequestHandler):
 
         du.save_day(start_of_day, break_length, end_of_day, formatted_worked_hours)
 
-        speak_output = "You ended your day at {ending_time}.".format(ending_time = time_output) + " Have a great day!"
+        speak_output = "You ended your day at {ending_time}.".format(ending_time = time_output) +  worked_hours_message + " so far. Have a great day!"
         
         return (
             handler_input.response_builder
