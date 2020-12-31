@@ -26,7 +26,7 @@ def save_end_of_break(handler_input, time):
 
 
 def save_end_of_day_and_total_hours(handler_input, time):
-    save_attribute('end_of_day', time)
+    save_attribute('end_of_day', handler_input, time)
     
     attr = handler_input.attributes_manager.persistent_attributes
     start_of_day = attr['start_of_day']
