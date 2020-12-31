@@ -19,3 +19,25 @@ class DbUtils:
     @dynamodb_adapter.setter
     def dynamodb_adapter(self, value):
         self._dynamodb_adapter = value
+
+    def save_day(start_of_day, break_length, end_of_day, total_worked_hours):
+        try:
+            table = ddb_resource.Table(ddb_table_name)
+            table.put_item(
+                Item={
+                    "id": "20201231",
+                    "start_of_day": start_of_day,
+                    "break_length": break_length,
+                    "end_of_day": end_of_day,
+                    "total_worked_hours": total_worked_hours
+                })
+        except ResourceNotExistsError:
+            raise PersistenceException(
+                "DynamoDb table {} doesn't exist. Failed to save attributes "
+                "to DynamoDb table.".format(
+                    ddb_table_name))
+        except Exception as e:
+            raise PersistenceException(
+                "Failed to save attributes to DynamoDb table. Exception of "
+                "type {} occurred: {}".format(
+                    type(e).__name__, str(e)))   

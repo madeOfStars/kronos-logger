@@ -16,8 +16,6 @@ from ask_sdk_core.skill_builder import CustomSkillBuilder
 
 from ask_sdk_model import Response
 
-from db_utils import DbUtils
-
 from custom_intents import LogStartingDayIntentHandler
 from custom_intents import LogStartOfBreakIntentHandler
 from custom_intents import LogEndOfBreakIntentHandler
@@ -25,8 +23,6 @@ from custom_intents import LogEndOfDayIntentHandler
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
-
-du = DbUtils()
 
 class LaunchRequestHandler(AbstractRequestHandler):
     """Handler for Skill Launch."""

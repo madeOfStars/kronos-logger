@@ -83,3 +83,8 @@ def make_difference_readable(time):
 
 
     return "You have worked " + hours_message + connector_message + minutes_message
+
+
+def format_timedelta(time):
+    hours, minutes = format_timedelta_to_hours_and_minutes(time)
+    return "{:02}:{:02}".format(hours, minutes)
