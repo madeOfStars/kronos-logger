@@ -4,6 +4,7 @@ import boto3
 from botocore.exceptions import ClientError
 
 from datetime import datetime
+from datetime import date
 
 FMT = "%H:%M"
 
@@ -88,3 +89,12 @@ def make_difference_readable(time):
 def format_timedelta(time):
     hours, minutes = format_timedelta_to_hours_and_minutes(time)
     return "{:02}:{:02}".format(hours, minutes)
+
+
+def get_current_date():
+    return date.today()
+
+
+def get_formatted_current_date():
+    today = get_current_date()
+    return today.strftime("%Y%m%d")

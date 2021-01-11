@@ -20,12 +20,12 @@ class DbUtils:
     def dynamodb_adapter(self, value):
         self._dynamodb_adapter = value
 
-    def save_day(self, start_of_day, break_length, end_of_day, total_worked_hours):
+    def save_day(self, current_date, start_of_day, break_length, end_of_day, total_worked_hours):
         try:
             table = self.ddb_resource.Table(self.ddb_table_name)
             table.put_item(
                 Item={
-                    "id": "20201231",
+                    "id": current_date,
                     "start_of_day": start_of_day,
                     "break_length": break_length,
                     "end_of_day": end_of_day,

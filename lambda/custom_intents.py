@@ -4,6 +4,7 @@ from ask_sdk_core.utils.request_util import get_slot_value
 
 from utils import format_time
 from utils import make_difference_readable
+from utils import get_formatted_current_date
 from session_utils import save_start_of_day
 from session_utils import save_start_of_break_and_calculate_worked_hours
 from session_utils import save_end_of_break
@@ -114,9 +115,11 @@ class LogEndOfDayIntentHandler(AbstractRequestHandler):
 
         worked_hours_message = make_difference_readable(total_worked_hours)
 
-        du.save_day(start_of_day, break_length, end_of_day, formatted_worked_hours)
+        current_date = get_formatted_current_date()
 
-        speak_output = "You ended your day at {ending_time}.".format(ending_time = time_output) +  worked_hours_message + " so far. Have a great day!"
+        du.save_day(current_date, start_of_day, break_length, end_of_day, formatted_worked_hours)
+
+        speak_output = "You ended your day at {ending_time}. ".format(ending_time = time_output) +  worked_hours_message + " so far. Have a great day!"
         
         return (
             handler_input.response_builder
