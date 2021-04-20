@@ -28,8 +28,6 @@ class HelloWorldIntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         speak_output = "Hello World!"
 
-        aws.insert()
-
         return (
             handler_input.response_builder
                 .speak(speak_output)
@@ -43,6 +41,7 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("LogStartingDayIntent")(handler_input)
         
     def handle(self, handler_input):
+        aws.insert()
         start_time_input = get_slot_value(handler_input, "start_time")
         
         time_output = start_time_input
