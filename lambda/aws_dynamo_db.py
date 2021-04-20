@@ -5,7 +5,7 @@ from boto3.session import ResourceNotExistsError
 class AwsDynamo:
     def __init__(self):
         sts_client = boto3.client('sts')
-        assumed_role_object=sts_client.assume_role(RoleArn="arn:aws:dynamodb:eu-west-1:136065421094:table/logged_hours", RoleSessionName="kronos_role")
+        assumed_role_object=sts_client.assume_role(RoleArn="arn:aws:iam::136065421094:role/kronos_role", RoleSessionName="kronos_role")
         credentials=assumed_role_object['Credentials']
 
         # 2. Make a new DynamoDB instance with the assumed role credentials
