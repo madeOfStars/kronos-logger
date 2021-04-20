@@ -18,7 +18,7 @@ class AwsDynamo:
             
             table.put_item(
                 Item={
-                    "id": "AAA"
+                    "id": "AAA",
                     "attr1": "BBB"
                 }
             )
