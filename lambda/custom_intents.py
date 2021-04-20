@@ -11,8 +11,11 @@ from session_utils import save_end_of_break
 from session_utils import save_end_of_day_and_total_hours
 
 from db_utils import DbUtils
+from aws_dynamo_db import AwsDynamo
 
 du = DbUtils()
+
+aws = AwsDynamo()
 
 
 class HelloWorldIntentHandler(AbstractRequestHandler):
@@ -24,6 +27,8 @@ class HelloWorldIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         speak_output = "Hello World!"
+
+        aws.insert()
 
         return (
             handler_input.response_builder
