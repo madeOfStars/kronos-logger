@@ -5,7 +5,7 @@ from boto3.session import ResourceNotExistsError
 class AwsDynamo:
     def __init__(self):
         sts_client = boto3.client('sts')
-        assumed_role_object=sts_client.assume_role(RoleArn="arn:aws:iam::074295620416:role/AlexaHostedSkillLambdaRole", RoleSessionName="AssumeRoleSession1")
+        assumed_role_object=sts_client.assume_role(RoleArn="arn:aws:iam::074295620416:role/AlexaHostedSkillLambdaRole", RoleSessionName="kronos_role")
         credentials=assumed_role_object['Credentials']
 
         # 2. Make a new DynamoDB instance with the assumed role credentials
@@ -17,10 +17,6 @@ class AwsDynamo:
 
 
     def insert(self):
-        res = boto3.resource(dynamo_string, us_west_2).get_available_subresources()
-        print(res)
-        cli = boto3.client(dynamo_string, us_west_2).list_tables()
-        print(cli)
         try:
             table = self.dynamodb.Table('logged_hours')
             
