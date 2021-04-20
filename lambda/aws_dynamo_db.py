@@ -1,3 +1,5 @@
+import boto3
+
 class AwsDynamo:
     def __init__(self):
         sts_client = boto3.client('sts')
