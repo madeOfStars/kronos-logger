@@ -17,6 +17,10 @@ class AwsDynamo:
 
 
     def insert(self):
+        res = boto3.resource(dynamo_string, us_west_2).get_available_subresources()
+        print(res)
+        cli = boto3.client(dynamo_string, us_west_2).list_tables()
+        print(cli)
         try:
             table = self.dynamodb.Table('logged_hours')
             
