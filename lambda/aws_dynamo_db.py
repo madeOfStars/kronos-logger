@@ -4,9 +4,9 @@ from boto3.session import ResourceNotExistsError
 
 class AwsDynamo:
     def __init__(self):
-        self.sts_client = boto3.client('sts')
-        self.assumed_role_object=self.sts_client.assume_role(RoleArn="arn:aws:iam::074295620416:role/AlexaHostedSkillLambdaRole", RoleSessionName="AssumeRoleSession1")
-        self.credentials=self.assumed_role_object['Credentials']
+        sts_client = boto3.client('sts')
+        assumed_role_object=sts_client.assume_role(RoleArn="arn:aws:iam::074295620416:role/AlexaHostedSkillLambdaRole", RoleSessionName="AssumeRoleSession1")
+        credentials=assumed_role_object['Credentials']
 
         # 2. Make a new DynamoDB instance with the assumed role credentials
         self.dynamodb = boto3.resource('dynamodb',
