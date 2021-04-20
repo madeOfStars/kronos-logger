@@ -14,9 +14,9 @@ class AwsDynamo:
                       region_name='eu-west-1')
 
 
-    def insert():
+    def insert(self):
         try:
-            table = dynamodb.Table('logged_hours')
+            table = self.dynamodb.Table('logged_hours')
             
             table.put_item(
                 Item={
