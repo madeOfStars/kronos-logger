@@ -41,7 +41,6 @@ class LogStartingDayIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("LogStartingDayIntent")(handler_input)
         
     def handle(self, handler_input):
-        aws.insert()
         start_time_input = get_slot_value(handler_input, "start_time")
         
         time_output = start_time_input
