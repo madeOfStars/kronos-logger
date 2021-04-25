@@ -120,7 +120,7 @@ class LogEndOfDayIntentHandler(AbstractRequestHandler):
 
         current_date = get_formatted_current_date()
 
-        du.save_day(current_date, start_of_day, break_length, end_of_day, formatted_worked_hours)
+        aws.save_day(current_date, start_of_day, break_length, end_of_day, formatted_worked_hours)
 
         speak_output = "You ended your day at {ending_time}. ".format(ending_time = time_output) +  worked_hours_message + " so far. Have a great day!"
         
