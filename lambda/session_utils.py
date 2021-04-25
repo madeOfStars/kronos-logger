@@ -45,7 +45,7 @@ def save_end_of_day_and_total_hours(handler_input, time):
 
 def save_attribute(attribute_name, handler_input, time):
     attr = handler_input.attributes_manager.persistent_attributes
-    attr[attribute_name] = time;
+    attr[attribute_name] = time
 
     handler_input.attributes_manager.session_attributes = attr
 
