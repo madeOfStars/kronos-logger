@@ -17,6 +17,7 @@ from ask_sdk_core.skill_builder import CustomSkillBuilder
 from ask_sdk_model import Response
 
 from db_utils import DbUtils
+from aws_dynamo_db import AwsDynamo
 
 from custom_intents import LogStartingDayIntentHandler
 from custom_intents import LogStartOfBreakIntentHandler
@@ -27,6 +28,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 du = DbUtils()
+aws = AwsDynamo()
 
 class LaunchRequestHandler(AbstractRequestHandler):
     """Handler for Skill Launch."""
@@ -147,7 +149,7 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
 # defined are included below. The order matters - they're processed top to bottom.
 
 
-sb = SkillBuilder()
+sb = CustomSkillBuilder(persistence_adapter = aws.dynamodb_adapter)
 
 sb.add_request_handler(LaunchRequestHandler())
 sb.add_request_handler(LogStartingDayIntentHandler())

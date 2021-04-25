@@ -2,6 +2,8 @@ import boto3
 
 from boto3.session import ResourceNotExistsError
 
+from ask_sdk_dynamodb.adapter import DynamoDbAdapter
+
 class AwsDynamo:
     def __init__(self):
         sts_client = boto3.client('sts')
@@ -14,26 +16,21 @@ class AwsDynamo:
                       aws_session_token=credentials['SessionToken'],
                       region_name='eu-west-1')
 
+        self.ddb_table_name = 'logged_hours'
 
-    def insert(self):
-        try:
-            table = self.dynamodb.Table('logged_hours')
-            
-            table.put_item(
-                Item={
-                    "id": "AAA",
-                    "attr1": "BBB"
-                }
-            )
-        except ResourceNotExistsError:
-            raise
-        except Exception as e:
-            raise e
+        self._dynamodb_adapter = DynamoDbAdapter(table_name=self.ddb_table_name, create_table=False, dynamodb_resource=self.dynamodb)
 
+    @property
+    def dynamodb_adapter(self):
+        return self._dynamodb_adapter
+
+    @dynamodb_adapter.setter
+    def dynamodb_adapter(self, value):
+        self._dynamodb_adapter = value
 
     def save_day(self, current_date, start_of_day, break_length, end_of_day, total_worked_hours):
         try:
-            table = self.dynamodb.Table('logged_hours')
+            table = self.dynamodb.Table(self.ddb_table_name)
             
             table.put_item(
                 Item={
